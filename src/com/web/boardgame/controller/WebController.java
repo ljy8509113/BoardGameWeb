@@ -33,7 +33,8 @@ public class WebController {
 		User user = null;
 
 		try {
-			user = userService.getUser("test5@gmail.com");
+			user = userService.getUser("test1@gmail.com");
+			System.out.println("user : " + user.getEmail());
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
