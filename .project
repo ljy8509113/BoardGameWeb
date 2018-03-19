@@ -3,6 +3,7 @@
 	<name>BoardGameWeb</name>
 	<comment></comment>
 	<projects>
+		<project>BoardGameDB</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
