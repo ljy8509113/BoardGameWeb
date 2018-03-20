@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.database.model.Game;
+import com.database.model.Notice;
 import com.database.model.User;
 import com.database.util.CustomException;
 import com.web.boardgame.service.GameService;
+import com.web.boardgame.service.NoticeService;
 import com.web.boardgame.service.UserService;
 
 @Controller
@@ -23,7 +25,12 @@ public class WebController {
 	//---선언--------------------------------------//
 	@Autowired
 	UserService userService;
+	
+	@Autowired
 	GameService gameService;
+	
+	@Autowired
+	NoticeService noticeService;
 	//--------------------------------------------//
 
 	//---여정--------------------------------------//
@@ -31,20 +38,48 @@ public class WebController {
 
 
 	//---성은--------------------------------------//
-//	@RequestMapping(value="introduce.do", method=RequestMethod.GET)
-//	public String getGameInfo(Model model, HttpServletRequest request,
-//			@RequestParam(value="game_no", required=true) String game_no) throws CustomException {
-////		Game game = null;
-////		
-////		game = gameService.detail(game_no);
-//		
-//		List<Game> list = gameService.list();
-//		
-//		model.addAttribute("game", list);
-//		
-//		return "game-introduce";
-//	}
+	@RequestMapping(value="game-introduce.do", method=RequestMethod.GET)
+	public String getGameInfo(Model model) throws CustomException {
+		
+		try {
+			List<Game> list = gameService.list();
 
+			model.addAttribute("gamelist", list);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "game-introduce";
+	}
+	
+	@RequestMapping(value="game-notice.do", method=RequestMethod.GET)
+	public String getNoticeInfo(Model model, HttpServletRequest request) throws CustomException{
+		try {
+			
+			List<Notice> list = noticeService.list();
+			
+			model.addAttribute("noticelist", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "game-notice";
+	}
+	
+	@RequestMapping(value="game-notice-detail", method=RequestMethod.GET)
+	public String noticeDetail(Model model, HttpServletRequest request,
+			@RequestParam(value="no", required=true) int no) throws CustomException{
+		Notice notice = null;
+		
+		try {
+			notice = noticeService.select(no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("notice", notice);
+		
+		return "game-notice-detail";
+	}
 
 	//---정욱--------------------------------------//
 	@RequestMapping(value="test.do", method=RequestMethod.GET)
