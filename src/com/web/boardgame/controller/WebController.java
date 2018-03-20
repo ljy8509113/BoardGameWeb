@@ -39,16 +39,17 @@ public class WebController {
 
 	//---성은--------------------------------------//
 	@RequestMapping(value="game-introduce.do", method=RequestMethod.GET)
-	public String getGameInfo(Model model) throws CustomException {
+	public String getGameInfo(Model model) {
 		
 		try {
 			List<Game> list = gameService.list();
 
 			model.addAttribute("gamelist", list);
 			
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (CustomException e) {
+			//e.printStackTrace();
 		}
+		
 		return "game-introduce";
 	}
 	
@@ -59,7 +60,7 @@ public class WebController {
 			List<Notice> list = noticeService.list();
 			
 			model.addAttribute("noticelist", list);
-		} catch (Exception e) {
+		} catch (CustomException e) {
 			e.printStackTrace();
 		}
 		
@@ -73,7 +74,7 @@ public class WebController {
 		
 		try {
 			notice = noticeService.select(no);
-		} catch (Exception e) {
+		} catch (CustomException e) {
 			e.printStackTrace();
 		}
 		model.addAttribute("notice", notice);

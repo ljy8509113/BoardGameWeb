@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Service;
 
-import com.database.controller.DBController;
+import com.database.dao.UserDao;
 import com.database.model.User;
 import com.database.util.CustomException;
 
@@ -12,6 +12,11 @@ import com.database.util.CustomException;
 @Service
 public class UserService {
 	//---선언--------------------------------------//
+	UserDao dao;
+	
+	public UserService() {
+		dao = new UserDao();
+	}
 	//--------------------------------------------//
 
 	//---여정--------------------------------------//
@@ -24,6 +29,6 @@ public class UserService {
 
 	//---정욱--------------------------------------//
 	public User getUser(String email) throws CustomException, ClassNotFoundException, SQLException {
-		return DBController.Instance().selectUser(email);
+		return dao.selectUser(email); //DBController.Instance().selectUser(email);
 	}
 }
