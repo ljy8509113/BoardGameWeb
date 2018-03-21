@@ -2,7 +2,6 @@ package com.web.boardgame.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.database.dao.GameDao;
@@ -13,22 +12,29 @@ import com.database.util.CustomException;
 public class GameService {
 	
 	GameDao dao;
-	
 	public GameService() {
 		dao = new GameDao();
 	}
 	
-//	public Game detail(String game_no) {
-//		//return 
-//	}
-
-	public List<Game> list() throws CustomException {
-		/*DBController controller = new DBController();
-		controller.selectAllGame();*/
+	public void add(Game game) throws CustomException {
+		//DBController.Instance().insertGame(game);
+		dao.insert(game);		
+	}
+	
+	public String modify(Game game) throws CustomException {
+		Game item = dao.select(game.getGameNo()); //DBController.Instance().selectGameDetail(game.getGameNo());
+		String filename = item.getCoverImage();
+		dao.update(item);//DBController.Instance().updateGame(game);
 		
-		// return controller.selectAllGame();
-//		return DBController.Instance().selectAllGame();
-		
+		return filename;
+	}
+	
+	public Game detailGame(Integer gameNo) throws CustomException {
+		return dao.select(gameNo); //DBController.Instance().selectGameDetail(gameNo);
+	}
+	
+	public List<Game> allGame() throws CustomException{
 		return dao.selectAll();
 	}
+
 }

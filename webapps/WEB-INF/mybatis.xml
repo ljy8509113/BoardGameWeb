@@ -14,4 +14,7 @@
   		<typeAlias type="com.web.boardgame.model.UserData" alias="UserData"/>  		
   	</typeAliases>
   	 -->
+  	 <typeAliases>
+  		<typeAlias type="com.web.boardgame.model.Admin" alias="Admin"/>  		
+  	</typeAliases>
   </configuration>
