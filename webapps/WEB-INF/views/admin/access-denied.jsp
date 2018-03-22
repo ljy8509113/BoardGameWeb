@@ -4,6 +4,12 @@
 <html>
 <head>
 <title>접근 제한 페이지</title>
+<style>
+	body { 
+		background-color: #A9A9A9;
+	 	font-style: #F8F8FF;
+	}
+</style>
 </head>
 <body>
 	<h1>접근 제한 페이지</h1>

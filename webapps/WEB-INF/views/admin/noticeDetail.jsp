@@ -4,9 +4,16 @@
 <!DOCTYPE>
 <html>
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
 <title>공지사항</title>
 </head>
 <body>
+	<div>
+		<jsp:include page="menu/menu-top.jsp" flush="false"/>
+	</div>
+
 	<h1>공지사항</h1>
 	
 	<ul>
@@ -26,6 +33,14 @@
 		<a href="<c:url value='/admin/noticeRemove.do?no=${ notice.no }' />">삭제</a>
 		<a href="<c:url value='/admin/noticeModify.do?no=${ notice.no }' />">수정</a>
 	</div>
+	
+	<div>
+		<jsp:include page="menu/menu-bottom.jsp" flush="false"/>
+	</div>
+	
+	<script src="/BoardGameWeb/js/jquery-3.3.1.min.js"></script>
+	<script src="/BoardGameWeb/js/popper.min.js"></script>
+	<script src="/BoardGameWeb/js/bootstrap.min.js"></script>
 	
 </body>
 </html>
