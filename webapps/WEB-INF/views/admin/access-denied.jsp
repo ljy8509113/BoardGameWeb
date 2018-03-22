@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>접근 제한 페이지</title>
 <style>
 	body { 

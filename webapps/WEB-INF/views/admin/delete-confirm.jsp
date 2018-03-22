@@ -8,7 +8,6 @@
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
 <title>Confirm</title>
 <style>
-	
 	#group1 {
 		text-align: center;
 		margin: 50px;

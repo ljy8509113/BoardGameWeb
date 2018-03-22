@@ -27,7 +27,6 @@
 	<div class="container">
 	
 	<h3>공지사항 작성</h3>
-	
 	<form action="<c:url value="/admin/noticeAdd.do" />" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label>작성자 : </label>

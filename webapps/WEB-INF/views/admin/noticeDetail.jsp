@@ -43,8 +43,7 @@
 		<jsp:include page="menu/menu-top.jsp" flush="false"/>
 	</div>
 	
-	<div class="container">
-			
+	<div class="container">	
 		<table id="ndetailtable" class="table table-bordered">
 			<caption>공지사항</caption>
 			<thead>

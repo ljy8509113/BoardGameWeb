@@ -16,7 +16,6 @@
 </style>
 </head>
 <body>
-	
 	<div>
 		<jsp:include page="menu/menu-top.jsp" flush="false"/>
 	</div>

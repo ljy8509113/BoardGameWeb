@@ -20,7 +20,6 @@
 	<div>
 		<jsp:include page="menu/menu-top.jsp" flush="false"/>
 	</div>	
-	
 	<div class="container">
 	<h3>게임 추가</h3>
 	<form action="<c:url value='/admin/gameListAdd.do'/>" method="post" enctype="multipart/form-data">

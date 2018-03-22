@@ -9,7 +9,6 @@
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
 <title>Game List</title>
 <style>
-
 	caption { 
 	    caption-side: top;
 	    font-size: 2.5rem;

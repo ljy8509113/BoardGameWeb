@@ -25,7 +25,6 @@
 	</div>
 	
 	<div class="container">
-
 		<h3>공지사항 수정</h3>
 		
 		<form method="post" enctype="multipart/form-data" action="<c:url value='/admin/noticeModify.do' />">
