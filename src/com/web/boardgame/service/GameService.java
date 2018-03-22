@@ -37,4 +37,8 @@ public class GameService {
 		return dao.selectAll();
 	}
 
+	public int getLastInsertGameNo() throws CustomException {
+		return dao.selectLastInsertNo();
+	}
+	
 }
