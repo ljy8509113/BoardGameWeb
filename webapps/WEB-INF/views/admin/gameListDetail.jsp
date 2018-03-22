@@ -7,6 +7,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
 <title>게임리스트 상세화면</title>
+<style>
+	caption { 
+	    caption-side: top;
+	    font-size: 2.5rem;
+	    margin-bottom: 10px;
+	}
+</style>
 </head>
 <body>
 	
@@ -15,9 +22,9 @@
 	</div>
 	
 	<div class="container">
-	<h1>게임 상세화면</h1>
 	
 	<table class="table table-hover">
+	<caption>게임</caption>
 		<tr>
 			<td colspan="2"><img alt="게임대표이미지" src="${ uploadpath }/${ game.coverImage }"></td>
 		</tr>

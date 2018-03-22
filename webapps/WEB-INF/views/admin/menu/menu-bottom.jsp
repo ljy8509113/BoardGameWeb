@@ -4,12 +4,30 @@
 <head>
 	
 <title>menu-bottom</title>
+<style>
+	#footer {
+		text-align: center;
+	}
+	#bottomimg {
+		display: inline-block;
+		width: 130px;
+		height: 120px;
+	}
+	.content {
+		display: inline-block;
+		margin-left: 50px;
+	}
+</style>
+
 </head>
 <body>
-	<footer class="bg-dark mt-1 p-4 text-center" style="color: #fff">
-		<img src="/BoardGameWeb/css/game.png" width="100" height="120" 
-			class="d-inline-block" alt="img">
- 		<span>Copyright &copy; 2018 BOARDGAME All Rights Reserved.</span>
+	<footer id="footer" class="bg-dark py-3" style="color: #fff">
+	<div class="container">
+		<img id="bottomimg" src="/BoardGameWeb/css/game.png" alt="img">
+			<div class="content">
+				Copyright &copy; 2018 BOARDGAME All Rights Reserved
+			</div>
+	</div>
  	</footer>
 
 </body>

@@ -7,63 +7,106 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
 <title>공지사항 수정</title>
+<style>
+	legend {
+		font-size: 1rem;
+	}
+	h3 {
+		margin: 50px 0;
+	}
+	#nmodibutton {
+		margin-bottom: 50px;
+	}
+</style>
 </head>
 <body>
 	<div>
 		<jsp:include page="menu/menu-top.jsp" flush="false"/>
 	</div>
-
-	<h1>공지사항 수정</h1>
 	
-	<form method="post" enctype="multipart/form-data" action="<c:url value='/admin/noticeModify.do' />">
-	<table>
-		<tr>
-			<td>작성자: </td>
-			<td>
-				${ admin.nickname }
-				<input type="hidden" value="${ admin.id }" name="writer">
-			</td>
-		</tr>
-		<tr>
-			<td>제목: </td>
-			<td><input type="text" name="title" value="${ notice.title }"></td>
-		</tr>
-		<tr>
-			<td>내용: </td>
-			<td><textarea name="description">${ notice.description }</textarea></td>
-		</tr>
-		<tr>	
-			<td>showTime</td>
-			<td><input type="datetime-local" name="showTime" value="${ notice.showTime }"></td>
-		</tr>
-		<tr>	
-			<td>endTime</td>
-			<td><input type="datetime-local" name="endTime"></td>
-		</tr>
-		<tr>
-			<td>타입: </td>
-			<td><input type="radio" name="type" value="B" checked> 게시판형</td>
-			<td><input type="radio" name="type" value="G"> 게임공지용</td>
-		</tr>
-		<tr>	
-			<td>참고주소</td>
-			<td> <input type="url" name="link" value="${ notice.link }"></td>
-		</tr>
-		<tr>
-			<td>게임번호: </td>
-			<td><input type="radio" id="notice1" name="gameNo" value=0 checked> 전체공지</td>
-			<td><input type="radio" id="notice2" name="gameNo" value=1> 1게임공지</td>
-		</tr>
-	</table>
+	<div class="container">
 
-		<input type="submit" value="글 수정">
-		<input type="reset" value="입력한 내용 삭제"><br>
-		<a href="<c:url value='/admin/noticeList.do?gameNo=1'/>">취소</a>
+		<h3>공지사항 수정</h3>
 		
-		<input type="hidden" name="no" value="${ notice.no }">
-		
-		<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
-	</form>
+		<form method="post" enctype="multipart/form-data" action="<c:url value='/admin/noticeModify.do' />">
+			<div class="form-group">
+				<label>작성자 : </label>
+				<label>${ admin.nickname }</label>	
+				<input type="hidden" value="${ admin.id }" name="writer">
+			</div>
+			<div class="form-group">
+				<label for="title">제목</label>
+				<input class="form-control" type="text" name="title" value="${ notice.title }">
+			</div>
+			<div class="form-group">
+				<label for="description">내용</label>
+				<textarea class="form-control" name="description" rows="10" placeholder="${ notice.description }"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="showTime">showTime</label>
+				<input class="form-control" type="datetime-local" name="showTime" value="${ notice.showTime }">
+			</div>
+			<div class="form-group">
+				<label for="endTime">endTime</label>
+				<input class="form-control" type="datetime-local" name="endTime" value="${ notice.endTime }">
+			</div>
+			
+			<fieldset class="form-group">
+			  <div class="row">
+			     <legend class="col-form-label col-sm-2 pt-0">타입</legend>
+		      <div class="col-sm-10">
+		        <div class="form-check">
+		          <input class="form-check-input" type="radio" name="type" id="type1" value="B" checked>
+		          <label class="form-check-label" for="type1">
+		          	 	게시판용
+		          </label>
+		        </div>
+		        <div class="form-check">
+		          <input class="form-check-input" type="radio" name="type" id="type2" value="G">
+		          <label class="form-check-label" for="type2">
+		            	게임공지용
+		          </label>
+		        </div>
+		      </div>
+		     </div>
+		    </fieldset>
+		    
+			<div class="form-group">
+				<label for="link">참고 주소 </label>
+				<input class="form-control" type="url" name="link" value="${ notice.link }">
+			</div>
+				
+			<fieldset class="form-group">
+			  <div class="row">
+			     <legend class="col-form-label col-sm-2 pt-0">게임번호</legend>
+		      <div class="col-sm-10">
+		        <div class="form-check">
+		          <input class="form-check-input" type="radio" name="gameNo" id="gameNo0" value="0" checked>
+		          <label class="form-check-label" for="gameNo0">
+		          	 	전체공지
+		          </label>
+		        </div>
+		        <div class="form-check">
+		          <input class="form-check-input" type="radio" name="gameNo" id="gameNo1" value="1">
+		          <label class="form-check-label" for="gameNo1">
+		            	다빈치코드
+		          </label>
+		        </div>
+		      </div>
+		     </div>
+		  	</fieldset>
+	
+			<div id="nmodibutton" align="right">
+				<input class="btn btn-secondary" type="submit" value="글 수정">
+				<input class="btn btn-secondary" type="reset" value="입력한 내용 삭제">
+			</div>
+			
+			<input type="hidden" name="no" value="${ notice.no }">
+			
+			<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
+		</form>
+	
+	</div>
 	
 	<div>
 		<jsp:include page="menu/menu-bottom.jsp" flush="false"/>

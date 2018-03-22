@@ -11,25 +11,17 @@
 	<title>Notice List</title>
 	
 	<style>
-		table {
-			margin: 7%;
-			width: 100%;
-			height: 600px;
+		#nListtable {
+			margin-top: 50px;
 		}
 		caption { 
 		    caption-side: top;
 		    font-size: 2.5rem;
 		    margin-bottom: 10px;
 		}
-		.container {
-			min-height: 70%;
+		#nbutton {
+			margin-bottom: 50px;
 		}
-		.footer {
-		  	height: 50px;
-		  	margin-top: -50px;
-		}
-		
-		
 	</style>
 </head>
 <body>
@@ -39,7 +31,7 @@
 
 	<div class="container">
 	
-		<table class="table table-hover">
+		<table id="nlisttable" class="table table-hover">
 		<caption>공지사항</caption>
 			<thead>
 				<tr>
@@ -60,7 +52,7 @@
 			</tbody>
 		</table>
 		
-		<div align="right">
+		<div id="nbutton" align="right">
 		<a href="<c:url value='/admin/noticeAdd.do' />">
 			<button type="button" class="btn btn-secondary btn-sm px-4 py-3 mx-2">글쓰기</button>
 		</a>

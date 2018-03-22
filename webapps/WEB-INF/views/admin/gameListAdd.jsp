@@ -8,13 +8,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
 </head>
+<style>
+	h3 {
+		margin: 50px 0;
+	}
+	#gaddbutton {
+		margin-bottom: 50px;
+	}
+</style>
 <body>
 	<div>
 		<jsp:include page="menu/menu-top.jsp" flush="false"/>
 	</div>	
 	
 	<div class="container">
-	<h2>게임 정보 작성</h2>
+	<h3>게임 추가</h3>
 	<form action="<c:url value='/admin/gameListAdd.do'/>" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label>작성자 : </label>
@@ -48,9 +56,9 @@
 		<div class="sub_image">
 		</div>
 		
-		<div align="right">
-		<input class="btn btn-secondary" type="submit" value="글 작성">
-		<input class="btn btn-secondary" type="reset" value="글 전체 삭제"><br>
+		<div id="gaddbutton" align="right">
+			<input class="btn btn-secondary" type="submit" value="글 작성">
+			<input class="btn btn-secondary" type="reset" value="글 전체 삭제"><br>
 		</div>
 		<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">		
 	</form>
