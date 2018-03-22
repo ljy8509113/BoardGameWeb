@@ -72,21 +72,27 @@ public class GameWebController {
 		String filename = null;
 		String imgPath = null;
 		String uploadPath = null;
-
+		List<SubImage> subImages = null;
+		
 		try {
 			game = gameService.detailGame(gameNo); //DBController.Instance().selectGameDetail(gameNo);
 
 			filename = game.getCoverImage();
 
 			if(filename != null && !filename.trim().isEmpty()) {
-
 				filename = URLDecoder.decode(filename, "UTF-8");
 			} 
 
 			imgPath = fileService.getImgPath(request, filename);
-
 			uploadPath = fileService.getUploadPath(request);
-
+			
+			subImages = subImageService.getImageList(gameNo);
+			
+			for(SubImage image : subImages) {
+				String fd = URLDecoder.decode(image.getPath(), "UTF-8");
+				image.setPath(fileService.getImgPath(request, fd));
+			}
+			
 		} catch (UnsupportedEncodingException e) {
 			System.out.println(e.getMessage());
 			model.addAttribute("error", "encoding");
@@ -103,6 +109,9 @@ public class GameWebController {
 		}
 
 		model.addAttribute("uploadpath", uploadPath);
+		
+		if(subImages != null)
+			model.addAttribute("subImages", subImages);
 
 		return "admin/gameListDetail";
 	}

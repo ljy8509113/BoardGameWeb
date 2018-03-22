@@ -48,6 +48,13 @@
 			<td>버전</td>
 			<td>${ game.version }</td>
 		</tr>
+		<tr>
+			<td>서브 이미지</td>
+			<c:forEach items="${subImages}" var="sub">
+				<td><img src="${ uploadpath }/${sub.path}"></td>
+			</c:forEach>
+			
+		</tr>
 	</table>
 	
 	<div align="right">
