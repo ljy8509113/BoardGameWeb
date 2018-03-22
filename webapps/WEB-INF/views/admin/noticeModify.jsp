@@ -3,9 +3,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
 <title>공지사항 수정</title>
 </head>
 <body>
+	<div>
+		<jsp:include page="menu/menu-top.jsp" flush="false"/>
+	</div>
+
 	<h1>공지사항 수정</h1>
 	
 	<form method="post" enctype="multipart/form-data" action="<c:url value='/admin/noticeModify.do' />">
@@ -57,5 +64,13 @@
 		
 		<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
 	</form>
+	
+	<div>
+		<jsp:include page="menu/menu-bottom.jsp" flush="false"/>
+	</div>
+	
+	<script src="/BoardGameWeb/js/jquery-3.3.1.min.js"></script>
+	<script src="/BoardGameWeb/js/popper.min.js"></script>
+	<script src="/BoardGameWeb/js/bootstrap.min.js"></script>
 </body>
 </html>
