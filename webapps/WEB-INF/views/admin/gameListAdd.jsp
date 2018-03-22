@@ -36,16 +36,21 @@
 			<label for="version">버전</label>
 			<input class="form-control" type="text" name="version">
 		</div>
+		<!-- 
 		<div class="form-group">
 			<label for="fileName">프리팹경로</label>
 			<input class="form-control" type="text" name="fileName">
 		</div>
+		 -->
 		<div class="form-group">
-			<label>이미지</label>
+			<label>대표 이미지</label>
 			<input class="form-control" type="file" name="coverImage">
 		</div>
-		<input type="button" value="추가" onclick="addImage();">
-		<div class="sub_image">
+		<div class="form-group">
+			<label>서브 이미지</label>
+			<input type="button" value="추가" onclick="addImage();">
+			<div class="sub_image form-control">
+			</div>
 		</div>
 		
 		<div align="right">
@@ -76,6 +81,8 @@
 			}else{
 				var layout = document.createElement("div");
 				$(layout).attr('id', 'layout_'+index);
+				$(layout).css('margin-top',10);
+				$(layout).css('margin-bottom',10);
 				
 				var button = document.createElement("input");
 				$(button).attr('type',"button");
