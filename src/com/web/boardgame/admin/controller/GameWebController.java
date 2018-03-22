@@ -56,7 +56,7 @@ public class GameWebController {
 			model.addAttribute("error", "server");
 		}
 
-		uploadPath = "file:///"+fileService.getUploadPath(request);
+		uploadPath = fileService.getUploadPath(request);
 
 		model.addAttribute("list", list);
 		model.addAttribute("uploadpath", uploadPath);

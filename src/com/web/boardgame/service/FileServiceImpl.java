@@ -15,14 +15,15 @@ import com.database.util.FileException;
 public class FileServiceImpl<T> implements FileService<T>{
 
 	/*private static final String UPLOAD_FOLDER = "/upload";*/
-	private static final String UPLOAD_FOLDER = "C:/upload";
+//	private static final String UPLOAD_FOLDER = "C:/upload";
+	private static final String UPLOAD_FOLDER = "";
 
 	@Override
 	public String add(HttpServletRequest request, MultipartFile coverImage) throws FileException {
 		try {
-			//String path = request.getServletContext().getRealPath(UPLOAD_FOLDER);
+			String path = request.getServletContext().getRealPath(UPLOAD_FOLDER);
 			String originalName = coverImage.getOriginalFilename();
-			File directory = new File(UPLOAD_FOLDER);
+			File directory = new File(path);
 			if(!directory.exists()) {
 				directory.mkdir();
 			}
@@ -35,7 +36,7 @@ public class FileServiceImpl<T> implements FileService<T>{
 						+ Long.toHexString(System.currentTimeMillis())
 						+ ext;
 			
-				coverImage.transferTo(new File(UPLOAD_FOLDER, uploadFilename));
+				coverImage.transferTo(new File(path, uploadFilename));
 				uploadFilename = URLEncoder.encode(uploadFilename, "UTF-8");
 				
 				return uploadFilename;
@@ -62,7 +63,7 @@ public class FileServiceImpl<T> implements FileService<T>{
 	// 이미지 경로 
 	@Override
 	public String getImgPath(HttpServletRequest request, String filename) {
-		//String contextPath = request.getContextPath();
+		String contextPath = request.getContextPath();
 		
 		if(filename != null && !filename.trim().isEmpty()) {
 			int idx = filename.lastIndexOf(".");
@@ -72,8 +73,8 @@ public class FileServiceImpl<T> implements FileService<T>{
 			case ".jpg":
 			case ".jpeg":
 			case ".png":
-				//return contextPath + UPLOAD_FOLDER + "/" + filename;
-				return UPLOAD_FOLDER + "/" + filename;
+				return contextPath + UPLOAD_FOLDER + "/" + filename;
+				//return UPLOAD_FOLDER + "/" + filename;
 			}
 		}
 		return null;
@@ -81,8 +82,8 @@ public class FileServiceImpl<T> implements FileService<T>{
 
 	@Override
 	public String getUploadPath(HttpServletRequest request) {
-//		return request.getContextPath() + UPLOAD_FOLDER;
-		return UPLOAD_FOLDER;
+		return request.getContextPath() + UPLOAD_FOLDER;
+		//return UPLOAD_FOLDER;
 	}
 	
 	
