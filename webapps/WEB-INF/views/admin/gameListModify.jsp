@@ -54,12 +54,22 @@
 			<input class="form-control" type="text" name="version" value="${ game.version }">
 		</div>
 		<div class="form-group">
-			<label for="fileName">프리팹경로</label>
-			<input class="form-control" type="text" name="fileName" value="${ game.fileName }">
+			<label>대표 이미지</label>
+			<input class="form-control" type="file" name="coverImage" value="${ game.coverImage }">
 		</div>
 		<div class="form-group">
-			<label>이미지</label>
-			<input class="form-control" type="file" name="coverImage" value="${ game.coverImage }">
+			<label>서브 이미지</label>
+			<input type="button" value="추가" onclick="addImage();">
+			<div class="sub_image form-control">
+				<c:set var="count" value="0"></c:set>
+				<c:forEach items="${ subImages }" var="subImage">
+					<c:set var="count" value="${count+1}"></c:set>
+					<div id="layout_${count}" style="margin-top:10px; margin-bottom:10px;">
+						<input type="file" name="sub${count}" value="${savePath}/${subImage.path}">
+						<input type="button" id="button_${count}" value="remove" onclick="remove(this);">
+					</div>
+				</c:forEach>
+			</div>
 		</div>
 		<div id="gmodibutton" align="right">
 			<input class="btn btn-secondary" type="submit" value="글 수정">
@@ -79,5 +89,46 @@
 	<script src="/BoardGameWeb/js/jquery-3.3.1.min.js"></script>
 	<script src="/BoardGameWeb/js/popper.min.js"></script>
 	<script src="/BoardGameWeb/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+		var subImages = [];
+		var index = 0;
+		function addImage(){
+			var child = $('.sub_image').children();
+			console.log("child : " + child.length);
+			
+			if(child.length >=4){
+				alert("최대 4개까지 입력가능");
+			}else{
+				var layout = document.createElement("div");
+				$(layout).attr('id', 'layout_'+index);
+				$(layout).css('margin-top',10);
+				$(layout).css('margin-bottom',10);
+				
+				var button = document.createElement("input");
+				$(button).attr('type',"button");
+				$(button).attr("id",'button_'+index);
+				$(button).attr('value','remove');
+				$(button).click(function(){
+					remove(this);
+				});
+				
+				var input = document.createElement("input");
+				$(input).attr('type', "file");
+				$(input).attr('name', "sub"+index);
+				
+				$(layout).append(input);
+				$(layout).append(button);
+				$('.sub_image').append(layout);
+				index++;
+			}
+		}	
+		
+		function remove(button){
+			var index = $(button).attr("id").split("_")[1];
+			console.log(index);
+			$('#layout_'+index).remove();
+		}
+	</script>
 </body>
 </html>

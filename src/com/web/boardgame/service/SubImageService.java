@@ -24,8 +24,17 @@ public class SubImageService {
 		return dao.select(gameNo);
 	}
 	
-	public void modify(SubImage image) throws CustomException {
-		dao.update(image);
+	public List<SubImage> modify(List<SubImage> list, int gameNo) throws CustomException {
+		List<SubImage> removeList = dao.select(gameNo);
+		
+		for(SubImage img : removeList) {
+			dao.delete(gameNo, img.getNo());
+		}
+		
+		for(SubImage img : list)
+			dao.insert(img);
+		
+		return removeList;
 	}
 	
 	public void remove(int gameNo, int no) throws CustomException {

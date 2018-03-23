@@ -13,7 +13,7 @@ public interface FileService<T> {
 	public String add(MultipartFile coverImage) throws FileException;
 	
 	// 파일 삭제
-	public void remove(String filename);
+	public void remove(String filename) throws FileException;
 	
 	// 파일 다운로드
 	public void download(HttpServletRequest request, HttpServletResponse response, String filename);
@@ -24,4 +24,6 @@ public interface FileService<T> {
 	// 파일 저장 폴더 경로 가져오기(ContextPath + /upload)
 	public String getUploadPath();
 	
+	//이미지 저장 폴더 절대경로
+	public String getRelaPath();
 }

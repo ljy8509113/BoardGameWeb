@@ -2,6 +2,7 @@ package com.web.boardgame.admin.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -158,8 +159,7 @@ public class GameWebController {
 		game.setDescription(req.getParameter("description"));
 		game.setState(req.getParameter("state"));
 		game.setVersion(req.getParameter("version"));
-		game.setFileName("");
-
+		
 		System.out.println("title : " + req.getParameter("title"));
 		System.out.println("description : " + req.getParameter("description"));
 
@@ -197,10 +197,10 @@ public class GameWebController {
 	}
 
 	// 서브이미지 추가 화면 이동
-	@RequestMapping(value="/subimage.do", method=RequestMethod.GET)
-	public String subImage(Model model) {
-		return "admin/subimage";
-	}
+//	@RequestMapping(value="/subimage.do", method=RequestMethod.GET)
+//	public String subImage(Model model) {
+//		return "admin/subimage";
+//	}
 
 	// 게임리스트 수정 화면
 	@RequestMapping(value="/gameListModify.do", method=RequestMethod.GET)
@@ -218,6 +218,13 @@ public class GameWebController {
 			game = gameService.detailGame(gameNo);
 			model.addAttribute("game", game);
 
+			List<SubImage> subImages = subImageService.getImageList(gameNo);
+			
+			if(subImages != null && subImages.size() > 0) {
+				model.addAttribute("subImages", subImages);
+			}
+				
+			model.addAttribute("savePath", fileService.getRelaPath());
 			
 		} catch (AdminException e) {
 			System.out.println(e.getMessage());
@@ -230,38 +237,52 @@ public class GameWebController {
 
 	// 수정 후 게임 목록으로 이동
 	@RequestMapping(value="/gameListModify.do", method=RequestMethod.POST)
-	public String modify(HttpServletRequest request,
-			Integer gameNo,
-			String title,
-			String description,
-			String state,
-			String version,
-			String fileName,
-			@RequestParam("coverImage") MultipartFile coverImage) {
-
-		Game game = new Game();
-		game.setGameNo(gameNo);
-		game.setTitle(title);
-		game.setDescription(description);
-		game.setState(state);
-		game.setVersion(version);
-		game.setFileName(fileName);
-
+	public String modify(MultipartHttpServletRequest req) {
+		int gameNo = Integer.parseInt(req.getParameter("gameNo")); 
+		
 		try {
+			Game game = gameService.detailGame(gameNo);
+			
+			MultipartFile coverImage = req.getFile("coverImage");
+			
 			String filename = fileService.add(coverImage);
 			game.setCoverImage(filename);
-
-			String toDeleteFilename = gameService.modify(game);
-
-			fileService.remove(toDeleteFilename);
-
-		} catch (FileException e) {
-			System.out.println(e.getMessage());
-			request.setAttribute("error", "file");
+			
+			game.setTitle(req.getParameter("title"));
+			game.setDescription(req.getParameter("description"));
+			game.setState(req.getParameter("state"));
+			game.setVersion(req.getParameter("version"));
+			
+			String removeFileName = gameService.modify(game);
+			fileService.remove(removeFileName);
+			
+			List<SubImage> subImages = new ArrayList<SubImage>();
+			Iterator<String> files = req.getFileNames();
+			
+			int index = 0;
+			while(files.hasNext()){
+				String uploadFile = files.next();
+				if(!uploadFile.equals("coverImage")) {
+					MultipartFile mFile = req.getFile(uploadFile);
+					String name = fileService.add(mFile);
+					
+					SubImage subImage = new SubImage(index, name, gameNo);
+					subImages.add(subImage);
+					index++;					
+				}				
+			}
+			
+			List<SubImage> removeList = subImageService.modify(subImages, gameNo);
+			for(SubImage img : removeList) {
+				subImageService.remove(img.getGameNo(), img.getNo());
+			}
+			
 		} catch (CustomException e) {
-			System.out.println(e.getMessage());
+			req.setAttribute("error", "server");
+		} catch (FileException e) {
+			req.setAttribute("error", "file");
 		}
-
+		
 		return "redirect:gameList.do";
 	}
 
