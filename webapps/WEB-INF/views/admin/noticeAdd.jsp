@@ -50,6 +50,13 @@
 		</div>
 		<div class="form-group">
 			<label for="gameNo">게임번호</label>
+			
+			<div class="custom-control custom-radio">
+				<input class="custom-control-input" type="radio" id="gameNo0" name="gameNo" value=0 checked>
+				<label class="custom-control-label" for="customRadio1">전체공지</label> 
+			</div>
+			
+			<label for="gameNo">게임번호</label>
 				<input class="form-control" type="radio" id="notice1" name="gameNo" value=0 checked> 전체공지
 				<input class="form-control" type="radio" id="notice2" name="gameNo" value=1> 1게임공지
 		</div>
