@@ -5,16 +5,7 @@
 <html>
 <head>
 <title>menu-top</title>
-<style>
-	li {
-		font-size: 1.3rem;
-	}
-	#topimg{
-		width: 90px;
-		height: 70px;
-		margin-left: 100px;	
-	}
-</style>
+	<link rel="stylesheet" href="/BoardGameWeb/css/admin.min.css">
 </head>
 <body>
 

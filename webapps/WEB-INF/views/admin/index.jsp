@@ -6,19 +6,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/BoardGameWeb/css/admin.min.css">
 <title>HOME PAGE</title>
-<style>
-.carousel-item {
-  height: 80vh;
-  min-height: 100px;
-  background: no-repeat center center scroll;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-</style>
+
 </head>
 <body>
 	<div>

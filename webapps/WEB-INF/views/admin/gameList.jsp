@@ -7,32 +7,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/BoardGameWeb/css/admin.min.css">
 <title>Game List</title>
-<style>
-	caption { 
-	    caption-side: top;
-	    font-size: 2.5rem;
-	    margin-bottom: 10px;
-	}
-	#gListtable {
-		margin-top: 50px;
-	}
-	img {
-		width: 200px;
-		height: 100px;
-	}
-	.table td {
-		vertical-align: middle;
-		text-align: center;
-	}
-	th {
-		text-align: center;
-	}
-	#gbutton {
-		margin: 50px 0;
-	}
 
-</style>
 </head>
 <body>
 	<div>
@@ -40,11 +17,10 @@
 	</div>
 	
 	<div class="container">
-
-		<table id="gListtable" class="table table-hover">
+		<table id="gntable" class="table table-hover">
 		<caption>게임 목록</caption>
 			<thead>
-				<tr>
+				<tr id="gnListtr">
 					<th>사진</th>
 					<th>제목</th>
 					<th>버전</th>
@@ -52,10 +28,10 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${ list }" var="game">
-					<tr>
+					<tr id="gnListtr">
 						<td>
 							<a href="<c:url value='/admin/gameListDetail.do?gameNo=${ game.gameNo }' />">
-								<img alt="image" src="${ uploadpath }/${ game.coverImage }">
+								<img id="glistimg" alt="image" src="${ uploadpath }/${ game.coverImage }">
 							</a>
 						</td>
 						<td><a href="<c:url value='/admin/gameListDetail.do?gameNo=${ game.gameNo }' />">${ game.title }</a></td>
@@ -65,7 +41,7 @@
 			</tbody>
 		</table>
 
-		<div id="gbutton" align="right">
+		<div id="gnbutton" align="right">
 			<a href="<c:url value='/admin/gameListAdd.do' />">
 				<button type="gbutton" class="btn btn-secondary btn-sm px-4 py-3 mx-2">등록</button>
 			</a>

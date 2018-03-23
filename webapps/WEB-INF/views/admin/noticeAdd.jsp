@@ -6,21 +6,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/BoardGameWeb/css/admin.min.css">
 <title>공지사항 작성</title>
-<style>
-	legend {
-		font-size: 1rem;
-	}
-	h3 {
-		margin: 50px 0;
-	}
-	#naddbutton {
-		margin-bottom: 50px;
-	}
-	#naddbutton > input {
-		margin: 0px 10px;
-	}
-</style>
+
 </head>
 <body>
 	<div>
@@ -98,7 +86,7 @@
 	    </div>
 	  </fieldset>
 		
-		<div id="naddbutton" align="right">
+		<div id="gnbutton" align="right">
 			<input class="btn btn-secondary btn-sm px-4 py-3 mx-2" type="submit" value="작성">
 			<input class="btn btn-secondary btn-sm px-4 py-3 mx-2" type="reset" value="전체 삭제">
 		</div>
