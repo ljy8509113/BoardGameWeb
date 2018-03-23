@@ -13,7 +13,7 @@
 
 </head>
 <body>
-	<div class="menu">
+	<div class="menutop">
 		<jsp:include page="menu/menu-top.jsp" flush="false"/>
 	</div>
 
@@ -48,7 +48,7 @@
 		
 	</div>
 	
-	<div class="footer">
+	<div class="menubottom">
 		<jsp:include page="menu/menu-bottom.jsp" flush="false"/>
 	</div>
 	

@@ -7,12 +7,10 @@
 </head>
 <body>
 	<footer id="footer" class="bg-dark py-3" style="color: #fff">
-	<div class="container">
-		<img id="bottomimg" src="/BoardGameWeb/css/game.png" alt="img">
-			<div class="content">
-				Copyright &copy; 2018 BOARDGAME All Rights Reserved
-			</div>
-	</div>
+		<div id="footercontent">
+			Copyright &copy; 2018 BOARDGAME All Rights Reserved<br>
+			서울시 금천구 가산디지털단지 제이플라츠 5층
+		</div>
  	</footer>
 
 </body>
