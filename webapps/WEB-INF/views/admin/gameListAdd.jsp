@@ -3,27 +3,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>게임 정보 작성</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/BoardGameWeb/css/admin.css">
+	<title>게임 정보 작성</title>
 </head>
-<style>
-	h3 {
-		margin: 50px 0;
-	}
-	#gaddbutton {
-		margin-bottom: 50px;
-	}
-	#gaddbutton > input {
-		margin: 0px 10px;
-	}
-</style>
+
 <body>
 	<div>
 		<jsp:include page="menu/menu-top.jsp" flush="false"/>
 	</div>	
 	<div class="container">
+	
 	<h3>게임 추가</h3>
 	<form action="<c:url value='/admin/gameListAdd.do'/>" method="post" enctype="multipart/form-data">
 		<div class="form-group">
@@ -63,7 +55,7 @@
 			</div>
 		</div>
 		
-		<div id="gaddbutton" align="right">
+		<div id="gnbutton" align="right">
 			<input class="btn btn-secondary btn-sm px-4 py-3 mx-2" type="submit" value="글 작성">
 			<input class="btn btn-secondary btn-sm px-4 py-3 mx-2" type="reset" value="글 전체 삭제"><br>
 		</div>

@@ -7,36 +7,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/BoardGameWeb/css/admin.css">
 <title>공지사항</title>
-<style>
-	#ndetailtable {
-			margin-top: 50px;
-		}
-	caption { 
-		    caption-side: top;
-		    font-size: 2.5rem;
-		    margin-bottom: 10px;
-		}
-	#trdes {
-		height: 400px;
-	}
-	th {
-		text-align: center;
-	}
-	#thtitle {
-		width: 300px;
-	}
-	#thdate {
-		width: 250px;
-	}
-	#tdname {
-		text-align: right;
-		padding-right: 50px;
-	}
-	#ndetailbutton {
-		margin: 50px 0;
-	}
-</style>
+
 </head>
 <body>
 	<div>
@@ -44,10 +17,10 @@
 	</div>
 	
 	<div class="container">	
-		<table id="ndetailtable" class="table table-bordered">
+		<table id="gntable" class="table table-bordered">
 			<caption>공지사항</caption>
 			<thead>
-				<tr>
+				<tr id="gnListtr">
 					<th>No.${ notice.no }</th>
 					<th id="thtitle" colspan="2">${ notice.title }</th>
 					<th id="thdate"><fmt:formatDate value="${ notice.regDate }" pattern="yyyy-MM-dd HH:mm:ss" /></th>

@@ -6,21 +6,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/BoardGameWeb/css/admin.css">
 <title>Confirm</title>
-<style>
-	#group1 {
-		text-align: center;
-		margin: 50px;
-		padding: 50px;
-	}
-	#group2 {
-		width: 650px;
-		padding: 30px;
-	}
-	#button{
-		margin: 10px;
-	}
-</style>
+
 </head>
 <body>
 	
@@ -36,10 +24,10 @@
 				<input type="hidden" name="no" value="${ no }">
 			</div>
 			<div id="group2">
-				<div align="right">
-						<input id="button" class="btn btn-secondary" type="submit" value="삭제">
+				<div align="center">
+						<input id="button" class="btn btn-secondary btn-sm px-4 py-3 mx-2" type="submit" value="삭제">
 					<a href="<c:url value='/admin/noticeList.do?gameNo=1'/>">
-						<button id="button" type="button" class="btn btn-secondary">취소</button>
+						<button id="deletebutton" type="button" class="btn btn-secondary btn-sm px-4 py-3 mx-2">취소</button>
 					</a>
 				</div>
 			</div>

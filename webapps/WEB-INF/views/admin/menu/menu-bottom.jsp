@@ -4,10 +4,6 @@
 <head>
 <title>menu-bottom</title>
 	<link rel="stylesheet" href="/BoardGameWeb/css/admin.css">
-<style>
-	
-</style>
-
 </head>
 <body>
 	<footer id="footer" class="bg-dark py-3" style="color: #fff">

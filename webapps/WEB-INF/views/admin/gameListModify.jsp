@@ -6,18 +6,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/BoardGameWeb/css/admin.css">
 <title>게임 작성글 수정</title>
-<style>
-	h3 {
-		margin: 50px 0;
-	}
-	#gmodibutton {
-		margin-bottom: 50px;
-	}
-	#gmodibutton > input {
-		margin: 10px 10px;
-	}
-</style>
+
 </head>
 <body>
 	<div>
@@ -61,9 +52,9 @@
 			<label>이미지</label>
 			<input class="form-control" type="file" name="coverImage" value="${ game.coverImage }">
 		</div>
-		<div id="gmodibutton" align="right">
-			<input class="btn btn-secondary" type="submit" value="글 수정">
-			<input class="btn btn-secondary" type="reset" value="입력한 내용 삭제">
+		<div id="gnbutton" align="right">
+			<input class="btn btn-secondary btn-sm px-4 py-3 mx-2" type="submit" value="글 수정">
+			<input class="btn btn-secondary btn-sm px-4 py-3 mx-2" type="reset" value="입력한 내용 삭제">
 		</div>
 		
 		<input type="hidden" name="gameNo" value="${ game.gameNo }">
