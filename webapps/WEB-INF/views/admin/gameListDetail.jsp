@@ -38,7 +38,7 @@
 	<table id="glisttable" class="table">
 	<caption>게임</caption>
 		<tr>
-			<td id="imgtd" colspan="2"><img alt="게임대표이미지" src="${ uploadpath }/${ game.coverImage }"></td>
+			<td id="imgtd" colspan="2"><img alt="게임대표이미지" src="${ uploadpath }/${ filename }"></td>
 		</tr>
 		<tr>
 			<th>번호</th>
