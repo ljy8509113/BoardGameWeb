@@ -21,7 +21,6 @@
 	.form-group {
 		width: 600px;
 	}
-
 </style>
 </head>
 <body>

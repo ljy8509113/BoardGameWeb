@@ -8,13 +8,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
 </head>
+<style>
+	h3 {
+		margin: 50px 0;
+	}
+	#gaddbutton {
+		margin-bottom: 50px;
+	}
+</style>
 <body>
 	<div>
 		<jsp:include page="menu/menu-top.jsp" flush="false"/>
 	</div>	
-	
 	<div class="container">
-	<h2>게임 정보 작성</h2>
+	<h3>게임 추가</h3>
 	<form action="<c:url value='/admin/gameListAdd.do'/>" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label>작성자 : </label>
@@ -36,21 +43,26 @@
 			<label for="version">버전</label>
 			<input class="form-control" type="text" name="version">
 		</div>
+		<!-- 
 		<div class="form-group">
 			<label for="fileName">프리팹경로</label>
 			<input class="form-control" type="text" name="fileName">
 		</div>
+		 -->
 		<div class="form-group">
-			<label>이미지</label>
+			<label>대표 이미지</label>
 			<input class="form-control" type="file" name="coverImage">
 		</div>
-		<input type="button" value="추가" onclick="addImage();">
-		<div class="sub_image">
+		<div class="form-group">
+			<label>서브 이미지</label>
+			<input type="button" value="추가" onclick="addImage();">
+			<div class="sub_image form-control">
+			</div>
 		</div>
 		
-		<div align="right">
-		<input class="btn btn-secondary" type="submit" value="글 작성">
-		<input class="btn btn-secondary" type="reset" value="글 전체 삭제"><br>
+		<div id="gaddbutton" align="right">
+			<input class="btn btn-secondary" type="submit" value="글 작성">
+			<input class="btn btn-secondary" type="reset" value="글 전체 삭제"><br>
 		</div>
 		<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">		
 	</form>
@@ -76,6 +88,8 @@
 			}else{
 				var layout = document.createElement("div");
 				$(layout).attr('id', 'layout_'+index);
+				$(layout).css('margin-top',10);
+				$(layout).css('margin-bottom',10);
 				
 				var button = document.createElement("input");
 				$(button).attr('type',"button");

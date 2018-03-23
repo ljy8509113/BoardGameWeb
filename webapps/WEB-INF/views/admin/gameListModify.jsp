@@ -7,16 +7,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
 <title>게임 작성글 수정</title>
+<style>
+	h3 {
+		margin: 30px 0;
+	}
+</style>
 </head>
 <body>
-
 	<div>
 		<jsp:include page="menu/menu-top.jsp" flush="false"/>
 	</div>
 		
 	<div class="container">
 		
-	<h1>게임 글 수정</h1>
+	<h3>게임 글 수정</h3>
 	
 	<form method="post" enctype="multipart/form-data" action="<c:url value='/admin/gameListModify.do' />">
 		<div class="form-group">

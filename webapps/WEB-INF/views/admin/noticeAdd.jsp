@@ -7,6 +7,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
 <title>공지사항 작성</title>
+<style>
+	legend {
+		font-size: 1rem;
+	}
+	h3 {
+		margin: 50px 0;
+	}
+	#naddbutton {
+		margin-bottom: 50px;
+	}
+</style>
 </head>
 <body>
 	<div>
@@ -15,8 +26,7 @@
 	
 	<div class="container">
 	
-	<h1>공지사항 작성</h1>
-	
+	<h3>공지사항 작성</h3>
 	<form action="<c:url value="/admin/noticeAdd.do" />" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label>작성자 : </label>
@@ -39,15 +49,32 @@
 			<label for="endTime">endTime</label>
 			<input class="form-control" type="datetime-local" name="endTime">
 		</div>
-		<div class="form-group">
-			<label for="type">타입 </label>
-				<input class="form-control" type="radio" name="type" value="B" checked> 게시판형
-				<input class="form-control" type="radio" name="type" value="G"> 게임공지용
-		</div>
+		
+		<fieldset class="form-group">
+		  <div class="row">
+		     <legend class="col-form-label col-sm-2 pt-0">타입</legend>
+	      <div class="col-sm-10">
+	        <div class="form-check">
+	          <input class="form-check-input" type="radio" name="type" id="type1" value="B" checked>
+	          <label class="form-check-label" for="type1">
+	          	 	게시판용
+	          </label>
+	        </div>
+	        <div class="form-check">
+	          <input class="form-check-input" type="radio" name="type" id="type2" value="G">
+	          <label class="form-check-label" for="type2">
+	            	게임공지용
+	          </label>
+	        </div>
+	      </div>
+	     </div>
+	   </fieldset>
+
 		<div class="form-group">
 			<label for="link">참고 주소 </label>
 			<input class="form-control" type="url" name="link">
 		</div>
+<<<<<<< HEAD
 		<div class="form-group">
 			<label for="gameNo">게임번호</label>
 			
@@ -60,8 +87,30 @@
 				<input class="form-control" type="radio" id="notice1" name="gameNo" value=0 checked> 전체공지
 				<input class="form-control" type="radio" id="notice2" name="gameNo" value=1> 1게임공지
 		</div>
+=======
+>>>>>>> branch 'master' of https://github.com/ljy8509113/BoardGameWeb.git
 		
-		<div align="right">
+		<fieldset class="form-group">
+		  <div class="row">
+		     <legend class="col-form-label col-sm-2 pt-0">게임번호</legend>
+	      <div class="col-sm-10">
+	        <div class="form-check">
+	          <input class="form-check-input" type="radio" name="gameNo" id="gameNo0" value="0" checked>
+	          <label class="form-check-label" for="gameNo0">
+	          	 	전체공지
+	          </label>
+	        </div>
+	        <div class="form-check">
+	          <input class="form-check-input" type="radio" name="gameNo" id="gameNo1" value="1">
+	          <label class="form-check-label" for="gameNo1">
+	            	다빈치코드
+	          </label>
+	        </div>
+	      </div>
+	    </div>
+	  </fieldset>
+		
+		<div id="naddbutton" align="right">
 			<input class="btn btn-secondary" type="submit" value="작성">
 			<input class="btn btn-secondary" type="reset" value="전체 삭제">
 		</div>

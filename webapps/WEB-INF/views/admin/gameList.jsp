@@ -9,6 +9,24 @@
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
 <title>Game List</title>
 <style>
+	caption { 
+	    caption-side: top;
+	    font-size: 2.5rem;
+	    margin-bottom: 10px;
+	}
+	#gListtable {
+		margin-top: 50px;
+	}
+	img {
+		width: 200px;
+		height: 100px;
+	}
+	th, td {
+		text-align: center;
+	}
+	#gbutton {
+		margin-bottom: 50px;
+	}
 
 </style>
 </head>
@@ -19,29 +37,31 @@
 	
 	<div class="container">
 
-		<h2>게임 목록</h2>
-	
-		<c:forEach items="${ list }" var="game">
-		<table class="table table-bordered">
-			<tr>
-				
-				<td rowspan="2"><img alt="image" src="${ uploadpath }/${ game.coverImage }"></td>
-				<td>제목</td>
-				<td>버전</td>
-			</tr>
-			<tr>
-				<td><a href="<c:url value='/admin/gameListDetail.do?gameNo=${ game.gameNo }' />">${ game.title }</a></td>
-				<td>${ game.version }</td>
-			</tr>
-	
+		<table id="gListtable" class="table table-bordered">
+		<caption>게임 목록</caption>
+			<thead>
+				<tr>
+					<th>사진</th>
+					<th>제목</th>
+					<th>버전</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${ list }" var="game">
+					<tr>
+						<td><img alt="image" src="${ uploadpath }/${ game.coverImage }"></td>
+						<td><a href="<c:url value='/admin/gameListDetail.do?gameNo=${ game.gameNo }' />">${ game.title }</a></td>
+					<td>${ game.version }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
-		</c:forEach>
-		
-		<div align="right">
-		<a href="<c:url value='/admin/gameListAdd.do' />">
-			<button type="button" class="btn btn-secondary btn-sm px-4 py-3 mx-2">등록</button>
-		</a>
-	</div>
+
+		<div id="gbutton" align="right">
+			<a href="<c:url value='/admin/gameListAdd.do' />">
+				<button type="gbutton" class="btn btn-secondary btn-sm px-4 py-3 mx-2">등록</button>
+			</a>
+		</div>
 	
 	</div>
 	

@@ -4,20 +4,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
 <title>menu-top</title>
 <style>
 	li {
 		font-size: 1.3rem;
 	}
+	#topimg{
+		width: 90px;
+		height: 70px;
+		margin-left: 100px;	
+	}
 </style>
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-	<a class="navbar-brand" href="<c:url value='/index.html'/>">
-		<img src="/BoardGameWeb/css/game.png" width="80" height="60" 
-			class="d-inline-block align-top ml-auto" alt="img">
+	<nav id="top" class="navbar navbar-expand-md navbar-dark bg-dark">
+	<a class="navbar-brand my-3" href="<c:url value='/index.html'/>">
+		<img id="topimg" src="/BoardGameWeb/css/game.png" width="90" height="70" 
+			class="d-inline-block align-top" alt="img">
 			<span>BoardGame</span>
 	</a>
 	<button class="navbar-toggler" type="button" 

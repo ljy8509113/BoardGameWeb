@@ -13,7 +13,6 @@
 	</div>
 
 	<h1>서브 이미지</h1>
-	
 	<div>
 		<jsp:include page="menu/menu-bottom.jsp" flush="false"/>
 	</div>
