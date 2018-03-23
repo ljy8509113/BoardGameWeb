@@ -8,10 +8,23 @@
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
 <title>게임리스트 상세화면</title>
 <style>
+	#glisttable {
+			margin-top: 50px;
+		}
 	caption { 
 	    caption-side: top;
 	    font-size: 2.5rem;
 	    margin-bottom: 10px;
+	}
+	#imgtd {
+		width: 400px;
+		height: 600px;
+	}
+	th {
+		text-align: center;
+	}
+	#glistbutton {
+		margin: 50px 0;
 	}
 </style>
 </head>
@@ -22,48 +35,45 @@
 	
 	<div class="container">
 	
-	<table class="table table-hover">
+	<table id="glisttable" class="table">
 	<caption>게임</caption>
 		<tr>
-			<td colspan="2"><img alt="게임대표이미지" src="${ uploadpath }/${ filename }"></td>
+			<td id="imgtd" colspan="2"><img alt="게임대표이미지" src="${ uploadpath }/${ filename }"></td>
 		</tr>
 		<tr>
-			<td>번호</td>
+			<th>번호</th>
 			<td>${ game.gameNo }</td>
 		</tr>
 		<tr>
-			<td>제목</td>
+			<th>제목</th>
 			<td>${ game.title }</td>
 		</tr>
 		<tr>
-			<td>내용</td>
+			<th>내용</th>
 			<td>${ game.description }</td>
 		</tr>
 		<tr>
-			<td>개발상태</td>
+			<th>개발상태</th>
 			<td>${ game.state }</td>
 		</tr>
 		<tr>
-			<td>버전</td>
+			<th>버전</th>
 			<td>${ game.version }</td>
 		</tr>
+		<c:forEach items="${subImages}" var="sub">
 		<tr>
-			<td>서브 이미지</td>
-			<c:forEach items="${subImages}" var="sub">
-				<td><img src="${ uploadpath }/${sub.path}"></td>
-			</c:forEach>
-			
+			<th>서브 이미지</th>
+			<td><img src="${ uploadpath }/${sub.path}"></td>
 		</tr>
+		</c:forEach>
 	</table>
 	
-	<div align="right">
+	<div id="glistbutton" align="right">
 		<a href="<c:url value='/admin/gameListModify.do?gameNo=${ game.gameNo }' />">
 			<button type="button" class="btn btn-secondary btn-sm px-4 py-3 mx-2">글 수정</button>
 		</a>
 	</div>
-	
-	
-	
+
 	</div>
 	
 	<div>

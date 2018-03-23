@@ -17,6 +17,9 @@
 	#naddbutton {
 		margin-bottom: 50px;
 	}
+	#naddbutton > input {
+		margin: 0px 10px;
+	}
 </style>
 </head>
 <body>
@@ -74,22 +77,7 @@
 			<label for="link">참고 주소 </label>
 			<input class="form-control" type="url" name="link">
 		</div>
-<<<<<<< HEAD
-		<div class="form-group">
-			<label for="gameNo">게임번호</label>
-			
-			<div class="custom-control custom-radio">
-				<input class="custom-control-input" type="radio" id="gameNo0" name="gameNo" value=0 checked>
-				<label class="custom-control-label" for="customRadio1">전체공지</label> 
-			</div>
-			
-			<label for="gameNo">게임번호</label>
-				<input class="form-control" type="radio" id="notice1" name="gameNo" value=0 checked> 전체공지
-				<input class="form-control" type="radio" id="notice2" name="gameNo" value=1> 1게임공지
-		</div>
-=======
->>>>>>> branch 'master' of https://github.com/ljy8509113/BoardGameWeb.git
-		
+
 		<fieldset class="form-group">
 		  <div class="row">
 		     <legend class="col-form-label col-sm-2 pt-0">게임번호</legend>
@@ -111,8 +99,8 @@
 	  </fieldset>
 		
 		<div id="naddbutton" align="right">
-			<input class="btn btn-secondary" type="submit" value="작성">
-			<input class="btn btn-secondary" type="reset" value="전체 삭제">
+			<input class="btn btn-secondary btn-sm px-4 py-3 mx-2" type="submit" value="작성">
+			<input class="btn btn-secondary btn-sm px-4 py-3 mx-2" type="reset" value="전체 삭제">
 		</div>
 		
 		<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">

@@ -9,7 +9,13 @@
 <title>게임 작성글 수정</title>
 <style>
 	h3 {
-		margin: 30px 0;
+		margin: 50px 0;
+	}
+	#gmodibutton {
+		margin-bottom: 50px;
+	}
+	#gmodibutton > input {
+		margin: 10px 10px;
 	}
 </style>
 </head>
@@ -37,7 +43,7 @@
 		</div>
 		<div class="form-group">
 			<label for="description">설명</label>
-			<textarea class="form-control" name="description" rows="10" placeholder="${ game.description }"></textarea>
+			<textarea class="form-control" name="description" rows="10">${ game.description }</textarea>
 		</div>
 		<div class="form-group">
 			<label for="state">상태</label>
@@ -55,9 +61,9 @@
 			<label>이미지</label>
 			<input class="form-control" type="file" name="coverImage" value="${ game.coverImage }">
 		</div>
-		<div align="right">
-		<input class="btn btn-secondary" type="submit" value="글 수정">
-		<input class="btn btn-secondary" type="reset" value="입력한 내용 삭제"><br>
+		<div id="gmodibutton" align="right">
+			<input class="btn btn-secondary" type="submit" value="글 수정">
+			<input class="btn btn-secondary" type="reset" value="입력한 내용 삭제">
 		</div>
 		
 		<input type="hidden" name="gameNo" value="${ game.gameNo }">
