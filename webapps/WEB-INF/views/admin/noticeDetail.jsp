@@ -17,9 +17,6 @@
 		    font-size: 2.5rem;
 		    margin-bottom: 10px;
 		}
-	#ndetailbutton {
-		margin-bottom: 50px;
-	}
 	#trdes {
 		height: 400px;
 	}
@@ -35,6 +32,9 @@
 	#tdname {
 		text-align: right;
 		padding-right: 50px;
+	}
+	#ndetailbutton {
+		margin: 50px 0;
 	}
 </style>
 </head>

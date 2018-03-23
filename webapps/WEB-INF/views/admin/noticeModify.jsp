@@ -17,6 +17,9 @@
 	#nmodibutton {
 		margin-bottom: 50px;
 	}
+	#nmodibutton > input {
+		margin: 0px 10px;
+	}
 </style>
 </head>
 <body>
@@ -39,7 +42,7 @@
 			</div>
 			<div class="form-group">
 				<label for="description">내용</label>
-				<textarea class="form-control" name="description" rows="10" placeholder="${ notice.description }"></textarea>
+				<textarea class="form-control" name="description" rows="10">${ notice.description }</textarea>
 			</div>
 			<div class="form-group">
 				<label for="showTime">showTime</label>
@@ -96,8 +99,8 @@
 		  	</fieldset>
 	
 			<div id="nmodibutton" align="right">
-				<input class="btn btn-secondary" type="submit" value="글 수정">
-				<input class="btn btn-secondary" type="reset" value="입력한 내용 삭제">
+				<input class="btn btn-secondary btn-sm px-4 py-3 mx-2" type="submit" value="글 수정">
+				<input class="btn btn-secondary btn-sm px-4 py-3 mx-2" type="reset" value="입력한 내용 삭제">
 			</div>
 			
 			<input type="hidden" name="no" value="${ notice.no }">

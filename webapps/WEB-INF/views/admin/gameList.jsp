@@ -21,11 +21,15 @@
 		width: 200px;
 		height: 100px;
 	}
-	th, td {
+	.table td {
+		vertical-align: middle;
+		text-align: center;
+	}
+	th {
 		text-align: center;
 	}
 	#gbutton {
-		margin-bottom: 50px;
+		margin: 50px 0;
 	}
 
 </style>
@@ -37,7 +41,7 @@
 	
 	<div class="container">
 
-		<table id="gListtable" class="table table-bordered">
+		<table id="gListtable" class="table table-hover">
 		<caption>게임 목록</caption>
 			<thead>
 				<tr>
@@ -49,9 +53,13 @@
 			<tbody>
 				<c:forEach items="${ list }" var="game">
 					<tr>
-						<td><img alt="image" src="${ uploadpath }/${ game.coverImage }"></td>
+						<td>
+							<a href="<c:url value='/admin/gameListDetail.do?gameNo=${ game.gameNo }' />">
+								<img alt="image" src="${ uploadpath }/${ game.coverImage }">
+							</a>
+						</td>
 						<td><a href="<c:url value='/admin/gameListDetail.do?gameNo=${ game.gameNo }' />">${ game.title }</a></td>
-					<td>${ game.version }</td>
+						<td>${ game.version }</td>
 					</tr>
 				</c:forEach>
 			</tbody>

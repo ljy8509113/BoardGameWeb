@@ -15,6 +15,9 @@
 	#gaddbutton {
 		margin-bottom: 50px;
 	}
+	#gaddbutton > input {
+		margin: 0px 10px;
+	}
 </style>
 <body>
 	<div>
@@ -61,8 +64,8 @@
 		</div>
 		
 		<div id="gaddbutton" align="right">
-			<input class="btn btn-secondary" type="submit" value="글 작성">
-			<input class="btn btn-secondary" type="reset" value="글 전체 삭제"><br>
+			<input class="btn btn-secondary btn-sm px-4 py-3 mx-2" type="submit" value="글 작성">
+			<input class="btn btn-secondary btn-sm px-4 py-3 mx-2" type="reset" value="글 전체 삭제"><br>
 		</div>
 		<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">		
 	</form>

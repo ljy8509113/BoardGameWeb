@@ -18,8 +18,21 @@
 		    font-size: 2.5rem;
 		    margin-bottom: 10px;
 		}
+		th, td {
+			text-align: center;
+		}
+		#thno {
+			width: 150px;
+		}
+		#thtitle {
+			width: 600px;
+		}
+		#thdate {
+			width: 300px;
+		}
+		
 		#nbutton {
-			margin-bottom: 50px;
+			margin: 50px 0;
 		}
 	</style>
 </head>
@@ -34,9 +47,9 @@
 		<caption>공지사항</caption>
 			<thead>
 				<tr>
-					<th>No.</th>
-					<th>제목</th>
-					<th>등록일</th>
+					<th id="thno">No.</th>
+					<th id="thtitle">제목</th>
+					<th id="thdate">등록일</th>
 				</tr>
 			</thead>
 			<tbody>
