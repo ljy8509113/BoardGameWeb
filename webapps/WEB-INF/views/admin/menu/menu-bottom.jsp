@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>menu-bottom</title>
-	<link rel="stylesheet" href="/BoardGameWeb/css/admin.css">
+	<link rel="stylesheet" href="/BoardGameWeb/css/admin.min.css">
 </head>
 <body>
 	<footer id="footer" class="bg-dark py-3" style="color: #fff">

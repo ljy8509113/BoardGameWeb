@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<link rel="stylesheet" href="/BoardGameWeb/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/BoardGameWeb/css/admin.css">
+	<link rel="stylesheet" href="/BoardGameWeb/css/admin.min.css">
 <title>게임 작성글 수정</title>
 
 </head>

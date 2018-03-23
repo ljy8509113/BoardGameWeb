@@ -5,7 +5,7 @@
 <html>
 <head>
 <title>menu-top</title>
-	<link rel="stylesheet" href="/BoardGameWeb/css/admin.css">
+	<link rel="stylesheet" href="/BoardGameWeb/css/admin.min.css">
 </head>
 <body>
 
