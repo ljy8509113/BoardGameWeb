@@ -55,7 +55,7 @@ public class WebController {
 			model.addAttribute("error", "server");
 		}
 		
-		uploadPath = fileService.getUploadPath(request);
+		uploadPath = fileService.getUploadPath();
 		
 		model.addAttribute("uploadpath", uploadPath);
 		

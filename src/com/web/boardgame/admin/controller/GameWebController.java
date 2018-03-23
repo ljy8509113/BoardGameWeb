@@ -56,7 +56,7 @@ public class GameWebController {
 			model.addAttribute("error", "server");
 		}
 
-		uploadPath = fileService.getUploadPath(request);
+		uploadPath = fileService.getUploadPath();
 
 		model.addAttribute("list", list);
 		model.addAttribute("uploadpath", uploadPath);
@@ -70,7 +70,7 @@ public class GameWebController {
 			@RequestParam(value="gameNo", required=true) Integer gameNo)  {
 		Game game = null;
 		String filename = null;
-		String imgPath = null;
+		//String imgPath = null;
 		String uploadPath = null;
 		List<SubImage> subImages = null;
 		
@@ -83,14 +83,18 @@ public class GameWebController {
 				filename = URLDecoder.decode(filename, "UTF-8");
 			} 
 
-			imgPath = fileService.getImgPath(request, filename);
-			uploadPath = fileService.getUploadPath(request);
+			//imgPath = filename;//fileService.getImgPath(filename);
+			uploadPath = fileService.getUploadPath();
 			
 			subImages = subImageService.getImageList(gameNo);
 			
+			System.out.println("uploadPath : " + uploadPath);
+			
 			for(SubImage image : subImages) {
 				String fd = URLDecoder.decode(image.getPath(), "UTF-8");
-				image.setPath(fileService.getImgPath(request, fd));
+				image.setPath(fd);
+				System.out.println("getPath : " + image.getPath());
+				System.out.println("fd : " + fd);
 			}
 			
 		} catch (UnsupportedEncodingException e) {
@@ -102,11 +106,12 @@ public class GameWebController {
 		}
 
 		model.addAttribute("game", game);
-		model.addAttribute("filename", filename);
+		if(filename != null && !filename.equals(""))
+			model.addAttribute("filename", filename);
 
-		if(imgPath != null && !imgPath.trim().isEmpty()) {
-			model.addAttribute("imgPath", imgPath);
-		}
+//		if(imgPath != null && !imgPath.trim().isEmpty()) {
+//			model.addAttribute("imgPath", imgPath);
+//		}
 
 		model.addAttribute("uploadpath", uploadPath);
 		
@@ -162,7 +167,7 @@ public class GameWebController {
 		MultipartFile coverImage = req.getFile("coverImage");
 
 		try {
-			String filename = fileService.add(req, coverImage);
+			String filename = fileService.add(coverImage);
 			game.setCoverImage(filename);
 			gameService.add(game);
 			
@@ -172,7 +177,7 @@ public class GameWebController {
 				String uploadFile = files.next();
 				if(!uploadFile.equals("coverImage")) {
 					MultipartFile mFile = req.getFile(uploadFile);
-					String name = fileService.add(req, mFile);
+					String name = fileService.add(mFile);
 					
 					SubImage subImage = new SubImage(index, name, gameNo);
 					subImageService.addSubImage(subImage);
@@ -243,12 +248,12 @@ public class GameWebController {
 		game.setFileName(fileName);
 
 		try {
-			String filename = fileService.add(request, coverImage);
+			String filename = fileService.add(coverImage);
 			game.setCoverImage(filename);
 
 			String toDeleteFilename = gameService.modify(game);
 
-			fileService.remove(request, toDeleteFilename);
+			fileService.remove(toDeleteFilename);
 
 		} catch (FileException e) {
 			System.out.println(e.getMessage());

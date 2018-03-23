@@ -16,14 +16,15 @@ public class FileServiceImpl<T> implements FileService<T>{
 
 	/*private static final String UPLOAD_FOLDER = "/upload";*/
 //	private static final String UPLOAD_FOLDER = "C:/upload";
-	private static final String UPLOAD_FOLDER = "";
+	private static final String IMAGE_MAPPING_NAME = "/saveImage";
+	private static final String IMAGE_SAVE_PATH = "C:\\image";
 
 	@Override
-	public String add(HttpServletRequest request, MultipartFile coverImage) throws FileException {
+	public String add(MultipartFile coverImage) throws FileException {
 		try {
-			String path = request.getServletContext().getRealPath(UPLOAD_FOLDER);
+			//String path = request.getServletContext().getRealPath(UPLOAD_FOLDER);
 			String originalName = coverImage.getOriginalFilename();
-			File directory = new File(path);
+			File directory = new File(IMAGE_SAVE_PATH);
 			if(!directory.exists()) {
 				directory.mkdir();
 			}
@@ -36,7 +37,7 @@ public class FileServiceImpl<T> implements FileService<T>{
 						+ Long.toHexString(System.currentTimeMillis())
 						+ ext;
 			
-				coverImage.transferTo(new File(path, uploadFilename));
+				coverImage.transferTo(new File(IMAGE_SAVE_PATH, uploadFilename));
 				uploadFilename = URLEncoder.encode(uploadFilename, "UTF-8");
 				
 				return uploadFilename;
@@ -49,7 +50,7 @@ public class FileServiceImpl<T> implements FileService<T>{
 	}
 
 	@Override
-	public void remove(HttpServletRequest request, String filename) {
+	public void remove(String filename) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -62,8 +63,8 @@ public class FileServiceImpl<T> implements FileService<T>{
 
 	// 이미지 경로 
 	@Override
-	public String getImgPath(HttpServletRequest request, String filename) {
-		String contextPath = request.getContextPath();
+	public String getImgPath(String filename) {
+		//String contextPath = request.getContextPath();
 		
 		if(filename != null && !filename.trim().isEmpty()) {
 			int idx = filename.lastIndexOf(".");
@@ -73,17 +74,17 @@ public class FileServiceImpl<T> implements FileService<T>{
 			case ".jpg":
 			case ".jpeg":
 			case ".png":
-				return contextPath + UPLOAD_FOLDER + "/" + filename;
-				//return UPLOAD_FOLDER + "/" + filename;
+//				return contextPath + UPLOAD_FOLDER + "/" + filename;
+				return IMAGE_SAVE_PATH + "\\" + filename;
 			}
 		}
 		return null;
 	}
 
 	@Override
-	public String getUploadPath(HttpServletRequest request) {
-		return request.getContextPath() + UPLOAD_FOLDER;
-		//return UPLOAD_FOLDER;
+	public String getUploadPath() {
+		//return request.getContextPath() + UPLOAD_FOLDER;
+		return IMAGE_MAPPING_NAME;
 	}
 	
 	

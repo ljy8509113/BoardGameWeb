@@ -25,7 +25,7 @@
 	<table class="table table-hover">
 	<caption>게임</caption>
 		<tr>
-			<td colspan="2"><img alt="게임대표이미지" src="${ uploadpath }/${ game.coverImage }"></td>
+			<td colspan="2"><img alt="게임대표이미지" src="${ uploadpath }/${ filename }"></td>
 		</tr>
 		<tr>
 			<td>번호</td>
