@@ -3,19 +3,9 @@
 <html>
 <head>
 <title>menu-bottom</title>
+	<link rel="stylesheet" href="/BoardGameWeb/css/admin.css">
 <style>
-	#footer {
-		text-align: center;
-	}
-	#bottomimg {
-		display: inline-block;
-		width: 130px;
-		height: 120px;
-	}
-	.content {
-		display: inline-block;
-		margin-left: 50px;
-	}
+	
 </style>
 
 </head>

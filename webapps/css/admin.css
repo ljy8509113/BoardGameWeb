@@ -1,0 +1,22 @@
+/*menutop*/
+li {
+		font-size: 1.3rem;
+}
+#topimg{
+	width: 90px;
+	height: 70px;
+	margin-left: 100px;	
+}
+/*menubottom*/
+#footer {
+	text-align: center;
+}
+#bottomimg {
+	display: inline-block;
+	width: 130px;
+	height: 120px;
+}
+.content {
+	display: inline-block;
+	margin-left: 50px;
+}
