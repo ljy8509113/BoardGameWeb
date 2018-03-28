@@ -18,5 +18,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/BoardGameDB"/>
+	<classpathentry kind="lib" path="webapps/lib/BoardGameDB.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
