@@ -21,7 +21,14 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.0.0</version>
 			</plugin>
-		</plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<includeSystemScope>true</includeSystemScope>
+				</configuration>
+			</plugin>
+		</plugins>		
 	</build>
 	<dependencies>
 		<!-- Spring Context -->
@@ -129,7 +136,7 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>4.2.4.RELEASE</version>
 		</dependency>
-		
+
 		<!-- JUnit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -144,6 +151,6 @@
 			<artifactId>spring-test</artifactId>
 			<version>4.3.14.RELEASE</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency>		
 	</dependencies>
 </project>
