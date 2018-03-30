@@ -21,20 +21,18 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.0.0</version>
 			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<includeSystemScope>true</includeSystemScope>
-				</configuration>
-			</plugin>
-		</plugins>		
+		</plugins>
 	</build>
 	<repositories>
 		<repository>
 			<id>board-game-db</id>
 			<name>db-project</name>
 			<url>${basedir}/src/main/webapp/lib/</url>
+		</repository>
+		<repository>
+			<id>in-project-jenkins</id>
+			<name>custom jars-jenkins</name>
+			<url>file://${JENKINS_HOME}/jobs/${JOB_NAME}/workspace/lib</url>
 		</repository>
 	</repositories>
 	<dependencies>
@@ -159,11 +157,11 @@
 			<version>4.3.14.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
-			
+
 		<dependency>
 			<groupId>com.database</groupId>
 			<artifactId>BoardGameDB</artifactId>
-			<version>0.0.1</version>			
-		</dependency>		
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 </project>
