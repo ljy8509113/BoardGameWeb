@@ -33,7 +33,8 @@
 		<repository>
 			<id>in-project-jenkins</id>
 			<name>custom jars-jenkins</name>
-			<url>file://${JENKINS_HOME}/workspace/${JOB_NAME}/src/main/webapp/lib</url>
+			<!-- <url>file://${JENKINS_HOME}/workspace/${JOB_NAME}/src/main/webapp/lib</url> -->
+			<url>file://${JENKINS_HOME}/jobs/${JOB_NAME}/workspace/lib</url>
 		</repository>
 		
 	</repositories>
