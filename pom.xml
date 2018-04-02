@@ -162,8 +162,8 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>boardgame</groupId>
-			<artifactId>db</artifactId>
+			<groupId>com.database</groupId>
+			<artifactId>BoardGameDB</artifactId>
 			<version>0.0.1</version>			
 		</dependency>
 	</dependencies>
