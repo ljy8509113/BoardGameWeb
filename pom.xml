@@ -27,13 +27,14 @@
 		<repository>
 			<id>board-game-db</id>
 			<name>db-project</name>
-			<url>${basedir}/src/main/webapp/lib/</url>
+			<url>${project.basedir}/src/main/webapp/lib/</url>
 		</repository>
 		<repository>
 			<id>in-project-jenkins</id>
 			<name>custom jars-jenkins</name>
 			<url>file://${JENKINS_HOME}/jobs/${JOB_NAME}/workspace/lib</url>
 		</repository>
+		
 	</repositories>
 	<dependencies>
 		<!-- Spring Context -->
