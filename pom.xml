@@ -26,8 +26,8 @@
 	 
 	<repositories>
 		<repository>
-			<id>board-game-db</id>
-			<name>db-project</name>
+			<id>in-project</id>
+			<name>custom jars</name>
 			<url>${project.basedir}/src/main/webapp/lib</url>
 		</repository>
 		<repository>
