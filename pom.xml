@@ -28,7 +28,8 @@
 		<repository>
 			<id>in-project</id>
 			<name>custom jars</name>
-			<url>${project.basedir}/src/main/webapp/lib/</url>			
+			<!-- <url>${project.basedir}/src/main/webapp/lib/</url> -->
+			<url>https://github.com/ljy8509113/BoardGameWeb/tree/master/src/main/webapp/lib/</url>			
 		</repository>
 		<repository>
 			<id>in-project-jenkins</id>
