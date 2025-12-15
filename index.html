@@ -1,231 +1,228 @@
 <!DOCTYPE html>
-<html>
-<style type="text/css">
-    html, body {
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        background-color: rgba(0, 0, 0, 0);
-        overflow: hidden;
-        position: fixed;
-    }
-</style>
-
+<html lang="ko">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- defer forces the library to execute after the html page is fully parsed. -->
-    <!-- This is needed to avoid race conditions, where the library executes and calls `onYouTubeIframeAPIReady` before the page is fully parsed. -->
-    <!-- See #873 on GitHub -->
-    <script defer src="https://www.youtube.com/iframe_api"></script>
+  <meta charset="UTF-8" />
+  <title>WebView YouTube Player</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background-color: #000;
+    }
+
+    .player-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 비율 */
+      background-color: #000;
+    }
+
+    #player {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
+  <!-- YouTube IFrame Player API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 
 <body>
-<div id="youTubePlayerDOM"></div>
-</body>
+<div class="container">
+  <div class="player-wrapper">
+    <div id="player"></div>
+  </div>
+</div>
 
-<script type="text/javascript">
-    var MODULE_CAPTIONS = "captions";
-    var MODULE_CC = "cc";
+<script>
+  let player;
 
-    var CAPTION_OFF = "";
+  // 플랫폼 체크
+  const isAndroid = !!window.Android;
+  const isiOS = !!(window.webkit &&
+                   window.webkit.messageHandlers &&
+                   window.webkit.messageHandlers.YouTubeBridge);
 
-    var UNSTARTED = "UNSTARTED";
-    var ENDED = "ENDED";
-    var PLAYING = "PLAYING";
-    var PAUSED = "PAUSED";
-    var BUFFERING = "BUFFERING";
-    var CUED = "CUED";
+  // URL ?v=VIDEO_ID&start=초 형태로 영상/시작위치 지정 가능
+  function getQueryParam(name) {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    } catch (e) {
+      return null;
+    }
+  }
 
-    var YouTubePlayerBridge = window.Android;
-    var YouTubePlayerCallbacks = window.Android;
-    var player;
+  function getInitialVideoId() {
+    return getQueryParam("v") || "e0L76jEmVv0"; // 기본 테스트용 ID
+  }
 
-    var timerId;
+  function getInitialStartSeconds() {
+    const s = getQueryParam("start");
+    return s ? parseFloat(s) || 0 : 0;
+  }
 
-    function onYouTubeIframeAPIReady() {
+  /**
+   * JS → 네이티브 공통 브리지
+   * Android:
+   *   Android.onYouTubeEvent(jsonString)
+   * iOS:
+   *   window.webkit.messageHandlers.YouTubeBridge.postMessage(object)
+   */
+  function sendToNative(type, payload) {
+    const message = {
+      type: type,
+      payload: payload || {}
+    };
 
-<!--      YouTubePlayerBridge.sendYouTubeIFrameAPIReady();-->
-
-      var youtubePlayerConfig = {
-        height: '100%',
-        width: '100%',
-        events: {
-          onReady: function(event) {  },
-          onStateChange: function(event) { sendPlayerStateChange(event.data) },
-          onPlaybackQualityChange: function(event) {  },
-          onPlaybackRateChange: function(event) {  },
-          onError: function(error) {  },
-          onApiChange: function(event) {  }
-        },
-        playerVars: {
-                    autoplay: 0,
-                    mute: 0,
-                    controls: 0,
-                    enablejsapi: 1,
-                    fs: 0,
-                    origin: 'https://www.naver.com',
-                    rel: 0,
-                    iv_load_policy: 3,
-                    cc_load_policy: 0,
-                    playsinline: 1
-                }
-      };
-
-      //if (<<injectedVideoId>>) {
-        //youtubePlayerConfig.videoId = <<injectedVideoId>>;
-      //}
-
-
-      youtubePlayerConfig.videoId = "e0L76jEmVv0";
-
-
-      player = new YT.Player('youTubePlayerDOM', youtubePlayerConfig);
+    // Android (JavascriptInterface)
+    if (isAndroid && typeof window.Android.onYouTubeEvent === "function") {
+      try {
+        window.Android.onYouTubeEvent(JSON.stringify(message));
+      } catch (_) {}
     }
 
-    function sendPlayerStateChange(playerState) {
-      clearTimeout(timerId);
+    // iOS (WKScriptMessageHandler)
+    if (isiOS) {
+      try {
+        window.webkit.messageHandlers.YouTubeBridge.postMessage(message);
+      } catch (_) {}
+    }
+  }
 
-      switch (playerState) {
-        case YT.PlayerState.UNSTARTED:
-          sendStateChange(UNSTARTED);
-          sendVideoIdFromPlaylistIfAvailable(player);
-          return;
+  // YouTube IFrame API 준비 콜백
+  function onYouTubeIframeAPIReady() {
+    const videoId = getInitialVideoId();
+    const startSeconds = getInitialStartSeconds();
 
-        case YT.PlayerState.ENDED:
-          sendStateChange(ENDED);
-          return;
-
-        case YT.PlayerState.PLAYING:
-          sendStateChange(PLAYING);
-
-          startSendCurrentTimeInterval();
-          sendVideoData(player);
-          return;
-
-        case YT.PlayerState.PAUSED:
-          sendStateChange(PAUSED);
-          return;
-
-        case YT.PlayerState.BUFFERING:
-          sendStateChange(BUFFERING);
-          return;
-
-        case YT.PlayerState.CUED:
-          sendStateChange(CUED);
-          return;
+    player = new YT.Player("player", {
+      videoId: videoId,
+      playerVars: {
+        autoplay: 0,
+        controls: 1,          // 유튜브 기본 컨트롤 노출
+        playsinline: 1,       // iOS 인라인 재생
+        rel: 0,
+        modestbranding: 1,
+        fs: 1,
+        enablejsapi: 1,
+        origin: window.location.origin // 반드시 실제 도메인과 일치
+      },
+      events: {
+        onReady: onPlayerReady,
+        onStateChange: onPlayerStateChange,
+        onError: onPlayerError
       }
+    });
+  }
 
-      function sendVideoData(player) {
-        var videoDuration = player.getDuration();
+  function onPlayerReady(event) {
+    const duration = event.target.getDuration();
+    sendToNative("ready", {
+      duration: duration
+    });
 
-<!--        YouTubePlayerBridge.sendVideoDuration(videoDuration);-->
+    const start = getInitialStartSeconds();
+    if (start > 0) {
+      event.target.seekTo(start, true);
+    }
+  }
 
-        var captions = [];
-        var captionModule = getCaptionModuleName();
-        if (captionModule) {
-            var tracks = player.getOption(captionModule, 'tracklist');
-            tracks.forEach(function (track) {
-                captions.push({languageCode: track['languageCode'], displayName: track['displayName']});
-            });
-        }
-<!--        YouTubePlayerBridge.sendVideoCaptions(JSON.stringify(captions));-->
-      }
-
-      // This method checks if the player is playing a playlist.
-      // If yes, it sends out the video id of the video being played.
-      function sendVideoIdFromPlaylistIfAvailable(player) {
-        var playlist = player.getPlaylist();
-        if ( typeof playlist !== 'undefined' && Array.isArray(playlist) && playlist.length > 0 ) {
-          var index = player.getPlaylistIndex();
-          var videoId = playlist[index];
-<!--          YouTubePlayerBridge.sendVideoId(videoId);-->
-        }
-      }
-
-      function sendStateChange(newState) {
-<!--        YouTubePlayerBridge.sendStateChange(newState)-->
-      }
-
-      function startSendCurrentTimeInterval() {
-<!--        timerId = setInterval(function() {-->
-<!--          YouTubePlayerBridge.sendVideoCurrentTime( player.getCurrentTime() )-->
-<!--          YouTubePlayerBridge.sendVideoLoadedFraction( player.getVideoLoadedFraction() )-->
-<!--        }, 100 );-->
-      }
+  function onPlayerStateChange(event) {
+    let stateName = "UNKNOWN";
+    switch (event.data) {
+      case YT.PlayerState.UNSTARTED:
+        stateName = "UNSTARTED"; break;
+      case YT.PlayerState.ENDED:
+        stateName = "ENDED"; break;
+      case YT.PlayerState.PLAYING:
+        stateName = "PLAYING"; break;
+      case YT.PlayerState.PAUSED:
+        stateName = "PAUSED"; break;
+      case YT.PlayerState.BUFFERING:
+        stateName = "BUFFERING"; break;
+      case YT.PlayerState.CUED:
+        stateName = "CUED"; break;
     }
 
-    // JAVA to WEB functions
+    sendToNative("stateChange", {
+      state: stateName,
+      rawState: event.data,
+      currentTime: player ? player.getCurrentTime() : 0
+    });
+  }
 
-    function seekTo(startSeconds) {
-      player.seekTo(startSeconds, true);
-    }
+  function onPlayerError(event) {
+    sendToNative("error", {
+      code: event.data
+    });
+  }
 
-    function pauseVideo() {
-      player.pauseVideo();
-    }
+  // ===== WebView에서 호출할 공개 API =====
 
-    function playVideo() {
-      player.playVideo();
-    }
+  function playVideo() {
+    if (player) player.playVideo();
+  }
 
-    function loadVideo(videoId, startSeconds) {
-      player.loadVideoById(videoId, startSeconds);
-<!--      YouTubePlayerBridge.sendVideoId(videoId);-->
-    }
+  function pauseVideo() {
+    if (player) player.pauseVideo();
+  }
 
-    function cueVideo(videoId, startSeconds) {
-      player.cueVideoById(videoId, startSeconds);
-<!--      YouTubePlayerBridge.sendVideoId(videoId);-->
-    }
+  function stopVideo() {
+    if (player) player.stopVideo();
+  }
 
-    function mute() {
-      player.mute();
-    }
+  function seekTo(seconds) {
+    if (player) player.seekTo(seconds, true);
+  }
 
-    function unMute() {
-      player.unMute();
-    }
+  function loadVideo(videoId, startSeconds) {
+    if (!player) return;
+    const start = typeof startSeconds === "number" ? startSeconds : 0;
+    player.loadVideoById(videoId, start);
+    sendToNative("videoChanged", {
+      videoId: videoId,
+      startSeconds: start
+    });
+  }
 
-    function setVolume(volumePercent) {
-      player.setVolume(volumePercent);
-    }
+  function mute() {
+    if (player) player.mute();
+  }
 
-    function setPlaybackRate(playbackRate) {
-      player.setPlaybackRate(playbackRate);
-    }
+  function unMute() {
+    if (player) player.unMute();
+  }
 
-    function nextVideo() {
-      player.nextVideo();
-    }
+  function setVolume(volumePercent) {
+    if (player) player.setVolume(volumePercent);
+  }
 
-    function previousVideo() {
-      player.previousVideo();
-    }
+  function getCurrentTime() {
+    if (!player) return 0;
+    return player.getCurrentTime();
+  }
 
-    function playVideoAt(index) {
-      player.playVideoAt(index);
-    }
-
-    function setLoop(loop) {
-      player.setLoop(loop);
-    }
-
-    function setShuffle(shuffle) {
-      player.setShuffle(shuffle);
-    }
-
-    function getMuteValue(requestId) {
-      var isMuted = player.isMuted();
-<!--      YouTubePlayerCallbacks.sendBooleanValue(requestId, isMuted);-->
-    }
-
-    function stopVideo() {
-      player.stopVideo();
-    }
-
-    function clearVideo() {
-      player.clearVideo();
-    }
+  function getDuration() {
+    if (!player) return 0;
+    return player.getDuration();
+  }
 </script>
+</body>
 </html>
