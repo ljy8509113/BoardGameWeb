@@ -183,7 +183,7 @@
   }
 
   function onPlayerPlaybackQualityChange(event) {
-    sendToNative("onPlaybackQualityChange", {
+    sendToNative("playbackQualityChange", {
       code: event.data
     });
   }
