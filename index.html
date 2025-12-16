@@ -129,6 +129,7 @@
         onStateChange: onPlayerStateChange,
         onError: onPlayerError,
         onPlaybackRateChange: onPlayerPlaybackRateChange,
+        onPlaybackQualityChange: onPlayerPlaybackQualityChange
       }
     });
   }
@@ -177,6 +178,12 @@
 
   function onPlayerPlaybackRateChange(event) {
     sendToNative("playbackRateChange", {
+      code: event.data
+    });
+  }
+
+  function onPlayerPlaybackQualityChange(event) {
+    sendToNative("onPlaybackQualityChange", {
       code: event.data
     });
   }
