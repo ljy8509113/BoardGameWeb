@@ -53,7 +53,7 @@
 
 <script>
   let player;
-
+  var timerId;
   // 플랫폼 체크
   const isAndroid = !!window.Android;
   const isiOS = !!(window.webkit &&
@@ -147,20 +147,28 @@
   }
 
   function onPlayerStateChange(event) {
+    clearTimeout(timerId);
     let stateName = "UNKNOWN";
     switch (event.data) {
       case YT.PlayerState.UNSTARTED:
-        stateName = "UNSTARTED"; break;
+        stateName = "UNSTARTED"; 
+        break;
       case YT.PlayerState.ENDED:
-        stateName = "ENDED"; break;
+        stateName = "ENDED"; 
+        break;
       case YT.PlayerState.PLAYING:
-        stateName = "PLAYING"; break;
+        startSendCurrentTimeInterval();
+        stateName = "PLAYING"; 
+        break;
       case YT.PlayerState.PAUSED:
-        stateName = "PAUSED"; break;
+        stateName = "PAUSED"; 
+        break;
       case YT.PlayerState.BUFFERING:
-        stateName = "BUFFERING"; break;
+        stateName = "BUFFERING"; 
+        break;
       case YT.PlayerState.CUED:
-        stateName = "CUED"; break;
+        stateName = "CUED"; 
+        break;
     }
 
     sendToNative("stateChange", {
@@ -188,6 +196,12 @@
     });
   }
 
+  function startSendCurrentTimeInterval() {
+    timerId = setInterval(function() {
+      sendToNative("videoCurrentTime", { time: player.getCurrentTime() });
+    }, 100 );
+  }
+  
   // ===== WebView에서 호출할 공개 API =====
 
   function playVideo() {
