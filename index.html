@@ -230,6 +230,16 @@
     });
   }
 
+  function cueVideo(videoId, startSeconds) {
+    if(!player) return;
+    const start = typeof startSeconds === "number" ? startSeconds : 0;
+    player.cueVideoById(videoId, start);
+    sendToNative("videoChanged", {
+      videoId: videoId,
+      startSeconds: start
+    });
+  }
+
   function mute() {
     if (player) player.mute();
   }
