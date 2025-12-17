@@ -109,17 +109,15 @@
 
   // YouTube IFrame API 준비 콜백
   function onYouTubeIframeAPIReady() {
-    const videoId = getInitialVideoId();
-    const startSeconds = getInitialStartSeconds();
+    // const videoId = getInitialVideoId();
+    // const startSeconds = getInitialStartSeconds();
 
     player = new YT.Player("player", {
-      videoId: videoId,
       playerVars: {
         autoplay: 0,
         controls: 0,          // 유튜브 기본 컨트롤 노출
         playsinline: 1,       // iOS 인라인 재생
         rel: 0,
-        modestbranding: 1,
         fs: 1,
         enablejsapi: 1,
         origin: window.location.origin // 반드시 실제 도메인과 일치
