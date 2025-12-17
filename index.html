@@ -157,8 +157,10 @@
         stateName = "ENDED"; 
         break;
       case YT.PlayerState.PLAYING:
+        stateName = "PLAYING";
+        
         startSendCurrentTimeInterval();
-        stateName = "PLAYING"; 
+        sendVideoData(player);
         break;
       case YT.PlayerState.PAUSED:
         stateName = "PAUSED"; 
@@ -200,6 +202,10 @@
     timerId = setInterval(function() {
       sendToNative("videoCurrentTime", { time: player.getCurrentTime() });
     }, 100 );
+  }
+
+  function sendVideoData(player) {
+    sendToNative("duration", { duration: player.getDuration() });
   }
   
   // ===== WebView에서 호출할 공개 API =====
