@@ -57,25 +57,6 @@
                    window.webkit.messageHandlers &&
                    window.webkit.messageHandlers.YouTubeBridge);
 
-  // URL ?v=VIDEO_ID&start=초 형태로 영상/시작위치 지정 가능
-  function getQueryParam(name) {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      return params.get(name);
-    } catch (e) {
-      return null;
-    }
-  }
-
-  function getInitialVideoId() {
-    return getQueryParam("v") || "e0L76jEmVv0"; // 기본 테스트용 ID
-  }
-
-  function getInitialStartSeconds() {
-    const s = getQueryParam("start");
-    return s ? parseFloat(s) || 0 : 0;
-  }
-
   /**
    * JS → 네이티브 공통 브리지
    * Android:
@@ -106,9 +87,6 @@
 
   // YouTube IFrame API 준비 콜백
   function onYouTubeIframeAPIReady() {
-    // const videoId = getInitialVideoId();
-    // const startSeconds = getInitialStartSeconds();
-
     player = new YT.Player("player", {
       playerVars: {
         autoplay: 0,
