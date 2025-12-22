@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
   <meta charset="UTF-8" />
   <title>WebView YouTube Player</title>
@@ -57,7 +57,12 @@
                    window.webkit.messageHandlers &&
                    window.webkit.messageHandlers.YouTubeBridge);
 
-  /**
+  
+  function getQueryParam(name) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(name);
+  }
+                   /**
    * JS → 네이티브 공통 브리지
    * Android:
    *   Android.onYouTubeEvent(jsonString)
@@ -95,7 +100,7 @@
         rel: 0,
         fs: 1,
         enablejsapi: 1,
-        origin: 'https://www.vlending.co.kr' // 반드시 실제 도메인과 일치
+        origin: window.origin // 반드시 실제 도메인과 일치
       },
       events: {
         onReady: onPlayerReady,
@@ -113,9 +118,9 @@
       duration: duration
     });
 
-    const start = getInitialStartSeconds();
-    if (start > 0) {
-      event.target.seekTo(start, true);
+    const videoIdFromUrl = getQueryParam("v");
+    if (videoIdFromUrl) {
+      player.cueVideo(videoIdFromUrl, 0);
     }
   }
 
