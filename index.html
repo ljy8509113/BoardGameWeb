@@ -107,7 +107,8 @@
         onStateChange: onPlayerStateChange,
         onError: onPlayerError,
         onPlaybackRateChange: onPlayerPlaybackRateChange,
-        onPlaybackQualityChange: onPlayerPlaybackQualityChange
+        onPlaybackQualityChange: onPlayerPlaybackQualityChange,
+        onApiChange: onApiChange
       }
     });
   }
@@ -172,6 +173,12 @@
 
   function onPlayerPlaybackQualityChange(event) {
     sendToNative("playbackQualityChange", {
+      code: event.data
+    });
+  }
+
+  function onApiChange(event) {
+    sendToNative("apiChange", {
       code: event.data
     });
   }
