@@ -98,9 +98,13 @@
         controls: 0,          // 유튜브 기본 컨트롤 노출
         playsinline: 1,       // iOS 인라인 재생
         rel: 0,
-        fs: 1,
+        fs: 0,
         enablejsapi: 1,
-        origin: window.origin // 반드시 실제 도메인과 일치
+        origin: window.origin, // 반드시 실제 도메인과 일치
+        widget_referrer: window.origin,
+        picture-in-picture: 0,
+        disablekb: 0,
+        iv_load_policy: 3
       },
       events: {
         onReady: onPlayerReady,
